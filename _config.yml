@@ -5,6 +5,13 @@ url: ""
 
 markdown: kramdown
 theme: minima
+permalink: /blog/:slug.html
+
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
 
 exclude:
   - AGENTS.md
@@ -15,4 +22,23 @@ exclude:
   - Gemfile.lock
 
 header_pages:
-  - index.md
+  - pages/index.md
+
+nav:
+  - title: About
+    children:
+      - pages/about/purpose.md
+      - pages/about/team.md
+      - pages/about/montana-tech.md
+  - title: Departments
+    children:
+      - pages/departments/software.md
+      - pages/departments/hardware.md
+      - pages/departments/modeling.md
+      - pages/departments/systems.md
+  - title: Activity
+    children:
+      - pages/activity/meetings.md
+      - pages/activity/status.md
+  - title: Blog
+    page: pages/blog.md

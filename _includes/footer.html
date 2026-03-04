@@ -1,7 +1,52 @@
 <footer class="site-footer">
   <div class="wrapper">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> {{ site.title | escape }}</p>
-    <p>{{ site.description | escape }}</p>
-    <p>Montana Tech &mdash; Butte, Montana</p>
+    <div class="footer-upper">
+      <div class="footer-nav">
+        <ul class="footer-nav-list">
+          {% for group in site.nav %}
+            {% if group.children %}
+            <li class="footer-nav-group">
+              <span class="footer-nav-label">{{ group.title }}</span>
+              <ul>
+                {% for child_path in group.children %}
+                  {% assign child = site.pages | where: "path", child_path | first %}
+                  {% if child.title %}
+                    <li><a href="{{ child.url | relative_url }}">{{ child.title | escape }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% assign next_index = forloop.index %}
+                {% assign next_item = site.nav[next_index] %}
+                {% if next_item.page %}
+                  {% assign linked = site.pages | where: "path", next_item.page | first %}
+                  {% if linked %}
+                    <li><a href="{{ linked.url | relative_url }}">{{ next_item.title | escape }}</a></li>
+                  {% endif %}
+                {% endif %}
+              </ul>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3 class="footer-heading">Contact</h3>
+        <div class="contact-links">
+          <a href="mailto:butteforge@mtech.edu" class="contact-item" aria-label="Email">
+            {% include icons/email.html %}
+          </a>
+          <a href="https://github.com/butteforge" class="contact-item" aria-label="GitHub">
+            {% include icons/github.html %}
+          </a>
+          <a href="https://www.mtech.edu" class="contact-item" aria-label="Montana Tech">
+            {% include icons/globe.html %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-title">&copy; <script>document.write(new Date().getFullYear())</script> {{ site.title | escape }}</p>
+      <p class="footer-desc">{{ site.description | escape }}</p>
+      <p class="footer-location">{% include icons/map-pin.html %} Montana Tech - Butte, Montana</p>
+    </div>
   </div>
 </footer>
