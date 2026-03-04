@@ -4,6 +4,7 @@
       <div class="footer-nav">
         <ul class="footer-nav-list">
           {% for group in site.nav %}
+            {% if group.children %}
             <li class="footer-nav-group">
               <span class="footer-nav-label">{{ group.title }}</span>
               <ul>
@@ -15,6 +16,14 @@
                 {% endfor %}
               </ul>
             </li>
+            {% elsif group.page %}
+              {% assign linked = site.pages | where: "path", group.page | first %}
+              {% if linked %}
+            <li class="footer-nav-group">
+              <span class="footer-nav-label"><a href="{{ linked.url | relative_url }}">{{ group.title | escape }}</a></span>
+            </li>
+              {% endif %}
+            {% endif %}
           {% endfor %}
         </ul>
       </div>

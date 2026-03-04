@@ -22,14 +22,18 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
   - `pages/activity/` - Activity section
     - `meetings.md` - Meeting notes
     - `status.md` - Project progress tracker
+  - `pages/blog.md` - Blog listing page (permalink: `/blog.html`)
+- `_posts/` - Blog posts (Jekyll special directory, `YYYY-MM-DD-title.md`)
 - `_config.yml` - Jekyll configuration
 - `_layouts/default.html` - Base HTML layout (wraps every page)
+- `_layouts/post.html` - Blog post layout
 - `_includes/header.html` - Shared site header (logo + navigation)
 - `_includes/footer.html` - Shared site footer (copyright + description)
 - `_includes/icons/` - SVG icon partials (included inline by Jekyll)
 - `assets/css/style.scss` - Custom styles (imports minima, then overrides)
 - `assets/images/logo.png` - Club logo image (raster)
 - `assets/icons/` - Standalone SVG icon source files
+- `favicon.ico` - Site favicon
 - `Dockerfile` - Multi-stage build (Jekyll + nginx) for local preview
 - `docker-compose.yml` - Docker Compose config to run the site locally on port 8080
 - `Gemfile` - Ruby dependencies for Jekyll / GitHub Pages
@@ -91,20 +95,30 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 5. Do not add `AGENTS.md`, `README.md`, or other infrastructure files to
    `nav`.
 
-## Git Practices
+## Blog Posts
 
-- Write clear, concise commit messages.
-- Do not commit build artifacts or the `_site/` directory.
-- The `.git/` directory should never be modified directly.
+- Blog posts live in `_posts/`. This is a special Jekyll directory; do not
+  rename or move it.
+- Each filename must follow the format `YYYY-MM-DD-title.md`.
+- Posts use `layout: post` and must include `title`, `date`, and a nested
+  `author` with `name` and `email` in the front matter.
+- The permalink pattern in `_config.yml` (`/blog/:slug.html`) maps posts
+  to `/blog/` URLs automatically.
+- The blog listing page (`pages/blog.md`) loops over `site.posts` and
+  renders each post as a card.
 
-## Things to Avoid
+## CSS Guidelines
 
-- Do not introduce JavaScript or external CSS unless explicitly requested.
-- Do not remove or overwrite the club logo without approval.
-- Do not change the site title or description in `_config.yml` without approval.
-- Do not add tracking scripts or analytics without explicit approval.
-- Do not use emoji or decorative Unicode characters in Markdown files.
-- Do not use em-dashes or en-dashes anywhere in the repository.
+- All custom styles live in `assets/css/style.scss`.
+- Keep CSS DRY by using CSS custom properties (variables) defined in the
+  `:root` block at the top of the stylesheet.
+- Never hardcode colors, font stacks, border-radii, or transition values
+  inline in rules. Use the existing `--color-*`, `--font-*`, `--radius-*`,
+  `--transition*`, `--shadow-*`, and `--hl-*` variables instead.
+- When a new value is needed in more than one rule, add a variable to
+  `:root` first and reference it everywhere.
+- Do not duplicate selectors. If two selectors share the same declarations,
+  combine them into a single comma-separated selector.
 
 ## SVG Icons
 

@@ -1,10 +1,11 @@
 <header class="site-header">
   <div class="wrapper">
     <a class="site-title" href="{{ '/' | relative_url }}">
-      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title | escape }}" width="80">
+      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title | escape }}" width="120">
     </a>
     <nav class="site-nav">
       {% for item in site.nav %}
+        {% if item.children %}
         <div class="nav-dropdown">
           <button class="nav-dropdown-toggle page-link" aria-haspopup="true" aria-expanded="false">
             {{ item.title }}
@@ -21,6 +22,12 @@
             {% endfor %}
           </ul>
         </div>
+        {% elsif item.page %}
+          {% assign linked = site.pages | where: "path", item.page | first %}
+          {% if linked %}
+          <a class="page-link nav-direct" href="{{ linked.url | relative_url }}">{{ item.title | escape }}</a>
+          {% endif %}
+        {% endif %}
       {% endfor %}
     </nav>
   </div>

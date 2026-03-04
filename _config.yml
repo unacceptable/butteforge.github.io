@@ -5,6 +5,13 @@ url: ""
 
 markdown: kramdown
 theme: minima
+permalink: /blog/:slug.html
+
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
 
 exclude:
   - AGENTS.md
@@ -33,3 +40,5 @@ nav:
     children:
       - pages/activity/meetings.md
       - pages/activity/status.md
+  - title: Blog
+    page: pages/blog.md
