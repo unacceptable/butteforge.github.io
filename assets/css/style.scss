@@ -100,11 +100,11 @@ body {
 }
 
 .site-nav .page-link {
-  margin-left: 24px;
+  margin-left: 20px;
   text-decoration: none;
   color: var(--color-text-on-dark-muted);
   font-weight: 500;
-  font-size: 0.95em;
+  font-size: 0.9em;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
@@ -279,12 +279,77 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+/* ===== Team Matrix ===== */
+.team-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 0.95em;
+}
+
+.team-matrix thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.team-matrix tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.team-matrix tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.team-matrix tbody td:first-child {
+  font-weight: 600;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.team-matrix td:last-child {
+  white-space: nowrap;
+}
+
+.team-matrix td:last-child a {
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+  margin-right: 10px;
+}
+
+.team-matrix td:last-child a:last-child {
+  margin-right: 0;
+}
+
+.team-matrix td:last-child a:hover {
+  color: var(--color-accent);
+}
+
+.team-matrix td:last-child a:visited {
+  color: var(--color-text-muted);
+}
+
+.team-matrix td:last-child a:visited:hover {
+  color: var(--color-accent);
+}
+
+.leader-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* ===== Footer ===== */
 .site-footer {
   background: var(--color-primary);
   color: var(--color-text-on-dark-subtle);
-  padding: 32px 0;
-  text-align: center;
+  padding: 40px 0 28px;
   font-size: 0.9em;
   border: none;
   margin-top: 40px;
@@ -294,17 +359,125 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.site-footer p {
-  margin: 4px 0;
+.footer-upper {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  text-align: left;
+}
+
+.footer-nav {
+  min-width: 120px;
+}
+
+.footer-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-nav-list a {
+  color: var(--color-text-on-dark-subtle);
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-list a:hover {
+  color: var(--color-accent-light);
+}
+
+.footer-nav-list a:visited {
   color: var(--color-text-on-dark-subtle);
 }
 
-.site-footer p:first-child {
+.footer-nav-list a:visited:hover {
+  color: var(--color-accent-light);
+}
+
+.footer-contact {
+  min-width: 160px;
+}
+
+.footer-heading {
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin: 0 0 12px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-on-dark-subtle);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item:hover {
+  color: var(--color-accent-light);
+}
+
+.contact-item:visited {
+  color: var(--color-text-on-dark-subtle);
+}
+
+.contact-item:visited:hover {
+  color: var(--color-accent-light);
+}
+
+.contact-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(244, 238, 214, 0.12);
+  padding-top: 20px;
+  text-align: center;
+}
+
+.footer-title {
   color: var(--color-text-on-dark);
   font-weight: 600;
   font-size: 1em;
+  margin: 0;
+}
+
+.footer-desc {
+  color: var(--color-text-on-dark-subtle);
+  margin: 2px 0 0;
+}
+
+.footer-location {
+  color: var(--color-text-on-dark-subtle);
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.footer-location .contact-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 /* ===== Responsive ===== */
@@ -333,5 +506,22 @@ body {
 
   .page-content h2 {
     font-size: 1.3em;
+  }
+
+  .footer-upper {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 16px;
+  }
+
+  .contact-links {
+    align-items: center;
   }
 }

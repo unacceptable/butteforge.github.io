@@ -1,7 +1,36 @@
 <footer class="site-footer">
   <div class="wrapper">
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> {{ site.title | escape }}</p>
-    <p>{{ site.description | escape }}</p>
-    <p>Montana Tech &mdash; Butte, Montana</p>
+    <div class="footer-upper">
+      <div class="footer-nav">
+        <h3 class="footer-heading">Pages</h3>
+        <ul class="footer-nav-list">
+          {% for page_path in site.header_pages %}
+            {% assign my_page = site.pages | where: "path", page_path | first %}
+            {% if my_page.title %}
+              <li><a href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3 class="footer-heading">Contact</h3>
+        <div class="contact-links">
+          <a href="mailto:jpach@mtech.edu" class="contact-item" aria-label="Email">
+            {% include icons/email.html %}
+          </a>
+          <a href="https://github.com/butteforge" class="contact-item" aria-label="GitHub">
+            {% include icons/github.html %}
+          </a>
+          <a href="https://www.mtech.edu" class="contact-item" aria-label="Montana Tech">
+            {% include icons/globe.html %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-title">&copy; <script>document.write(new Date().getFullYear())</script> {{ site.title | escape }}</p>
+      <p class="footer-desc">{{ site.description | escape }}</p>
+      <p class="footer-location">{% include icons/map-pin.html %} Montana Tech - Butte, Montana</p>
+    </div>
   </div>
 </footer>

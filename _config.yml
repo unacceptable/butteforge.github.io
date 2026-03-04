@@ -15,4 +15,8 @@ exclude:
   - Gemfile.lock
 
 header_pages:
-  - index.md
+  - pages/index.md
+  - pages/about.md
+  - pages/teams.md
+  - pages/meetings.md
+  - pages/status.md

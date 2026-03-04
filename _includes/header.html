@@ -1,8 +1,7 @@
 <header class="site-header">
   <div class="wrapper">
     <a class="site-title" href="{{ '/' | relative_url }}">
-      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Club Logo" width="60">
-      {{ site.title | escape }}
+      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title | escape }}" width="80">
     </a>
     <nav class="site-nav">
       {% for path in site.header_pages %}

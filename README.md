@@ -34,7 +34,11 @@ HTML (mirroring GitHub Pages), then nginx serves the static files.
 
 | File / Directory   | Purpose                                          |
 |--------------------|--------------------------------------------------|
-| `index.md`         | Main landing page                                |
+| `pages/`           | Site pages (Markdown content)                    |
+| `pages/index.md`   | Main landing page                                |
+| `pages/about.md`   | About the organization                           |
+| `pages/teams.md`   | The four departments                             |
+| `pages/status.md`  | Project progress tracker                         |
 | `_config.yml`      | Jekyll configuration (theme, navigation, etc.)   |
 | `assets/images/logo.png` | Club logo (raster)                          |
 | `Gemfile`          | Ruby dependencies for Jekyll / GitHub Pages      |
@@ -45,9 +49,10 @@ HTML (mirroring GitHub Pages), then nginx serves the static files.
 
 ## Adding a New Page
 
-1. Create a new `.md` file in the repository root (e.g., `about.md`).
-2. Add it to the `header_pages` list in `_config.yml` so it appears in the
-   site navigation.
+1. Create a new `.md` file in the `pages/` directory.
+2. Add front matter with `layout: default`, `title`, and a `permalink`.
+3. Add `pages/<filename>` to the `header_pages` list in `_config.yml` so it
+   appears in the site navigation.
 3. End the page with the copyright footer:
    `(c) 2026 THE BUTTE FORGE: EMBEDDED SYSTEMS & AI`
 

@@ -8,18 +8,24 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 
 ## Repository Structure
 
-- `index.md` -- Main landing page
-- `_config.yml` -- Jekyll configuration
-- `_layouts/default.html` -- Base HTML layout (wraps every page)
-- `_includes/header.html` -- Shared site header (logo + navigation)
-- `_includes/footer.html` -- Shared site footer (copyright + description)
-- `assets/css/style.scss` -- Custom styles (imports minima, then overrides)
-- `assets/images/logo.png` -- Club logo image (raster)
-- `Dockerfile` -- Multi-stage build (Jekyll + nginx) for local preview
-- `docker-compose.yml` -- Docker Compose config to run the site locally on port 8080
-- `Gemfile` -- Ruby dependencies for Jekyll / GitHub Pages
-- `README.md` -- Human-readable project documentation
-- `AGENTS.md` -- This file (instructions for AI agents; excluded from site build)
+- `pages/` - Site pages (Markdown content served by Jekyll)
+  - `pages/index.md` - Main landing page (permalink: `/`)
+  - `pages/about.md` - About the organization
+  - `pages/teams.md` - The four departments
+  - `pages/status.md` - Project progress tracker
+- `_config.yml` - Jekyll configuration
+- `_layouts/default.html` - Base HTML layout (wraps every page)
+- `_includes/header.html` - Shared site header (logo + navigation)
+- `_includes/footer.html` - Shared site footer (copyright + description)
+- `_includes/icons/` - SVG icon partials (included inline by Jekyll)
+- `assets/css/style.scss` - Custom styles (imports minima, then overrides)
+- `assets/images/logo.png` - Club logo image (raster)
+- `assets/icons/` - Standalone SVG icon source files
+- `Dockerfile` - Multi-stage build (Jekyll + nginx) for local preview
+- `docker-compose.yml` - Docker Compose config to run the site locally on port 8080
+- `Gemfile` - Ruby dependencies for Jekyll / GitHub Pages
+- `README.md` - Human-readable project documentation
+- `AGENTS.md` - This file (instructions for AI agents; excluded from site build)
 
 ## Content Rules
 
@@ -27,6 +33,7 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 - Do not use emoji characters in any file.
 - Do not use em-dashes (U+2014).
 - Do not use en-dashes (U+2013).
+- Do not use double hyphens (`--`) as separators; use a single hyphen instead.
 - Keep line lengths reasonable (under 120 characters where practical).
 - Do not duplicate the header or footer in page content; they are rendered
   automatically by the shared layout.
@@ -38,6 +45,9 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 - Files listed under `exclude` in `_config.yml` are not published to the site. Keep `AGENTS.md`, `Dockerfile`, `docker-compose.yml`, `Gemfile`, and `Gemfile.lock` excluded.
 - To test locally, run `docker compose up --build -d` and visit `http://localhost:8080`.
 - To stop the local preview, run `docker compose down`.
+- **After any change to a Markdown (`.md`) page or `_config.yml`, rebuild the
+  container** with `docker compose up --build -d` so the change can be
+  verified locally.
 
 ## Layouts and Includes (DRY)
 
@@ -52,17 +62,21 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 
 ## Adding New Pages
 
-1. Create a new `.md` file in the repository root.
-2. Add front matter at the top with `layout: default` and a `title`:
+1. Create a new `.md` file inside the `pages/` directory.
+2. Add front matter at the top with `layout: default`, a `title`, and a
+   `permalink`:
    ```
    ---
    layout: default
    title: Page Title
+   permalink: /page-title.html
    ---
    ```
-3. Add the filename to the `header_pages` list in `_config.yml` if it should
-   appear in site navigation.
-4. Do not add `AGENTS.md`, `README.md`, or other infrastructure files to
+3. Add `pages/<filename>` to the `header_pages` list in `_config.yml` if it
+   should appear in site navigation.
+4. Do not place site pages in the repository root. Only infrastructure files
+   (`AGENTS.md`, `README.md`, etc.) belong in the root.
+5. Do not add `AGENTS.md`, `README.md`, or other infrastructure files to
    `header_pages`.
 
 ## Git Practices
@@ -79,3 +93,17 @@ This is a GitHub Pages site for THE BUTTE FORGE: EMBEDDED SYSTEMS & AI, a studen
 - Do not add tracking scripts or analytics without explicit approval.
 - Do not use emoji or decorative Unicode characters in Markdown files.
 - Do not use em-dashes or en-dashes anywhere in the repository.
+
+## SVG Icons
+
+- Never inline SVG markup directly in HTML templates. Always break SVGs out
+  into separate files.
+- Standalone SVG source files go in `assets/icons/` (e.g.,
+  `assets/icons/icon-email.svg`).
+- For SVGs that need to be rendered inline in layouts or includes, create a
+  corresponding partial in `_includes/icons/` (e.g.,
+  `_includes/icons/email.html`) and use `{% include icons/email.html %}`.
+- The `_includes/icons/` partials may include presentation attributes like
+  `class`, `width`, and `height` so they render correctly in context.
+- Do not embed raw `<svg>` tags in `_includes/header.html`,
+  `_includes/footer.html`, or any layout file.
